@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useRef, useState } from "react";
 import './Form.css';
 
 const Form = (props) => {

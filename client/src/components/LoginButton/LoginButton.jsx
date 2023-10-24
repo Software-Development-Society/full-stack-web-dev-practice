@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import './LoginButton.css'
 const LoginButton = (props) => {
 
