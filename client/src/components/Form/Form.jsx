@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useRef, useState } from "react";
 import './Form.css';
+import useLogin from "../../hooks/useLogin";
 
 const Form = (props) => {
 
@@ -48,6 +49,15 @@ const Form = (props) => {
 
         if(vNumber && vFName && vLName){
             props.enable(true)
+
+            const requestBody = {
+                fName: fName.current.value,
+                lName: lName.current.value,
+                number: number.current.value
+            }
+
+           props.request.current = requestBody
+
         }
 
         // console.log("fname ", fName.current.value)

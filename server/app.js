@@ -1,19 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const app = express();
+
 
 const cors = require('cors')
 
-const app = express();
 
-app.use(bodyParser.json);
+
+app.use(bodyParser.json());
 
 app.use(cors());
 
-app.get("/login-request", (req, res) => {
+app.post("/login-request", (req, res) => {
     console.log(req.body)
+    res.send("done")
 })
 
-
-
-
-app.listen(/*process.env.PORT ||*/ 5000);
+app.listen(5005);
