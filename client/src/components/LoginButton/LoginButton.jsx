@@ -2,17 +2,18 @@
 import useLogin from '../../hooks/useLogin'
 import './LoginButton.css'
 const LoginButton = (props) => {
+    
+    const {handleClick, requestResult} = useLogin()
 
-    const handleClick = () => {
-        const requestBody = props.request.current
-        console.log("in loginbutton.jsx", requestBody)
-
-        const response = useLogin(requestBody)
+    const handleLogin = () => {
+ 
+        handleClick(props.request.current)
     }
 
     return (
         <div >
-            <button className="buttonx" onClick={handleClick} disabled={!props.enabled}>This is a button</button>
+            <h1>{JSON.stringify(requestResult)}</h1>
+            <button className="buttonx" onClick={handleLogin} disabled={!props.enabled}>This is a button</button>
         </div>
     )
 }

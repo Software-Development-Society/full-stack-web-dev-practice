@@ -1,23 +1,32 @@
+import { useState } from "react"
 
 
-const useLogin = (requestBody) => {
+const useLogin = () => {
 
-    const sendLoginData = async () => {
+    const [requestResult, setRequestResult] = useState()
+
+    const sendLoginData = async (requestBody) => {
         let response = await fetch('http://localhost:5005/login-request', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                'firstName': requestBody.fName,
-                'lastName': requestBody.lName,
-                'number': requestBody.number
+                'username': requestBody.username,
+                'password': requestBody.password,
+                'email': requestBody.email
             })
         })
+        const jsonData = await response.json()
+        return jsonData
     }
-    sendLoginData()
+    const handleClick = async (requestBody) => {
+        console.log("in loginbutton.jsx", requestBody)
+        const data = await sendLoginData(requestBody)
+        setRequestResult(data)
+    }
 
-    return null
+    return {handleClick, requestResult}
 }
 
 export default useLogin

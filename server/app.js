@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const app = express();
 
 
-const cors = require('cors')
+const cors = require('cors');
+const { createUser } = require('./db/db');
 
 
 
@@ -13,7 +14,8 @@ app.use(cors());
 
 app.post("/login-request", (req, res) => {
     console.log(req.body)
-    res.send("done")
+    createUser(req.body)
+    res.json("done")
 })
 
 app.listen(5005);

@@ -1,59 +1,58 @@
 /* eslint-disable react/prop-types */
 import { useRef, useState } from "react";
 import './Form.css';
-import useLogin from "../../hooks/useLogin";
 
 const Form = (props) => {
 
-    const fName = useRef("")
-    const lName = useRef("")
-    const number = useRef("")
+    const username = useRef("")
+    const password = useRef("")
+    const email = useRef("")
 
-    const [validFName, setValidFName] = useState(false)
-    const [validLName, setValidLName] = useState(false)
-    const [validNumber, setValidNumber] = useState(false)
+    const [validUsername, setValidUsername] = useState(false)
+    const [validPassword, setValidPassword] = useState(false)
+    const [validEmail, setValidEmail] = useState(false)
 
 
 
     const handleChange = () =>{
         // setFname(event.target.value)
-        let vFName = validFName
-        let vLName = validLName
-        let vNumber = validNumber
+        let vUsername = validUsername
+        let vPassword = validPassword
+        let vEmail = validEmail
 
-        if(fName.current.value.length < 2){
-            setValidFName(false)
-            vFName = false
+        if(username.current.value.length < 2){
+            setValidUsername(false)
+            vUsername = false
             props.enable(false)
         } else {
-            setValidFName(true)
-            vFName= true
+            setValidUsername(true)
+            vUsername = true
         }
 
-        if(lName.current.value.length < 2){
-            setValidLName(false)
-            vLName = false
+        if(password.current.value.length < 2){
+            setValidPassword(false)
+            vPassword = false
             props.enable(false)
         } else {
-            setValidLName(true)
-            vLName = true
+            setValidPassword(true)
+            vPassword = true
         }
-        if(number.current.value.length !== 10){
-            setValidNumber(false)
-            vNumber = false
+        if(email.current.value.length < 2){
+            setValidEmail(false)
+            vEmail = false
             props.enable(false)
         } else {
-            setValidNumber(true)
-            vNumber = true
+            setValidEmail(true)
+            vEmail = true
         }
 
-        if(vNumber && vFName && vLName){
+        if(vEmail && vUsername && vPassword){
             props.enable(true)
 
             const requestBody = {
-                fName: fName.current.value,
-                lName: lName.current.value,
-                number: number.current.value
+                username: username.current.value,
+                email: email.current.value,
+                password: password.current.value
             }
 
            props.request.current = requestBody
@@ -67,14 +66,14 @@ const Form = (props) => {
 
     return (
         <form onChange={handleChange} className="form-class">
-            <label htmlFor="fName">First name:</label>
-            <input  className={validFName ? "" : "invalid"} ref={fName} name="fName" type="text" ></input>
+            <label htmlFor="username">username:</label>
+            <input  className={validUsername ? "" : "invalid"} ref={username} name="username" type="text" ></input>
             <br></br>
-            <label htmlFor="lName">Last name:</label>
-            <input className={validLName ? "" : "invalid"} ref={lName} name="lName" type="text" ></input>
+            <label htmlFor="password">password:</label>
+            <input className={validPassword ? "" : "invalid"} ref={password} name="password" type="text" ></input>
             <br></br>
-            <label htmlFor="number">Phone number:</label>
-            <input className={validNumber ? "" : "invalid"} ref={number} name="number" type="text" ></input>
+            <label htmlFor="email">email:</label>
+            <input className={validEmail ? "" : "invalid"} ref={email} name="email" type="text" ></input>
         </form>
     )
 }
